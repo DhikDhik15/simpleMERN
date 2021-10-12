@@ -1,0 +1,23 @@
+{
+  "name": "back-mern",
+  "version": "1.0.0",
+  "description": "backend mern",
+  "main": "app.js",
+  "scripts": {
+    "test": "simple"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DhikDhik15/simpleMERN.git"
+  },
+  "keywords": [
+    "simple",
+    "mern"
+  ],
+  "author": "DhikDhik15",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DhikDhik15/simpleMERN/issues"
+  },
+  "homepage": "https://github.com/DhikDhik15/simpleMERN#readme"
+}
