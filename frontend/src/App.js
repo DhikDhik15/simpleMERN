@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+//
+import Beranda from "./components/home";
+import Navbar from "./components/navbar";
+import List, { ListInv } from "./components/listInv";
+import Form from "./components/form";
+import { Container } from "react-bootstrap";
+// import Manajemen from './components/manajemenBuku';
+// const BrowserRouter = require("react-router-dom").BrowserRouter;
+// const Route = require("react-router-dom").Route;
+// const Switch = require("react-router-dom").Switch;
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="content">
+        <Container>
+          <Navbar />
+          <Beranda />
+          <ListInv />
+          <Form />
+        </Container>
+      </div>
     </div>
   );
 }
