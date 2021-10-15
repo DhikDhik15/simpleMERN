@@ -1,43 +1,76 @@
-//
 import Navbar from "./components/Navbar";
-import { Container } from "react-bootstrap";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { useState } from "react";
-import Home from "./components/Home";
-import ManajemenInv from "./components/ManajemenInv";
+import React, { useState, useEffect } from "react";
+import Beranda from "./components/Beranda";
+import ManajemenBuku from "./components/ManajemenBuku";
+import axios from "axios";
 
 function App() {
-  const [inv, setInv] = useState([]);
-  function storeData(inputInv) {
-    console.log(inputInv);
-    alert("Success");
+  const [books, setBooks] = useState([
+    // {_id: 1, pengarang:"test", judul:"test", harga:1, stok: 12}
+  ]);
+
+  function getBook(){
+    axios({
+      method: "get",
+      url: "http://localhost:3001/get",
+    }).then((response) => setBooks(response.data.data));
   }
-  function updateData(inputInv) {
-    console.log(inv);
+
+  useEffect(() => {
+    getBook();
+  },[]);
+  
+
+  function storeData(inputBook) {
+    // console.log(inputBook);
+    // alert("Success");
+    axios({
+      method: "POST",
+      url: "http://localhost:3001/add"
+    })
+    .then((res) => {
+      setBooks((prevBooks) => [...prevBooks, inputBook]);
+      alert("Success");
+    }).catch((error) => {
+      console.log(error.response.data)
+    });
+  }
+
+  useEffect(() => {
+    storeData()
+  },[]);
+
+  function updateData(inputBook) {
+    console.log(inputBook);
     alert("Berhasil Update");
   }
-  function deleteData(inv){
-    console.log(inv);
+  function deleteData(book) {
+    console.log(book);
     alert("Deleted");
   }
 
   return (
     <div className="App">
       <div className="content">
-        <Container>
-          <BrowserRouter>
-            <Navbar />
-            <Switch>
-              <Route path="/" exact>
-                <Home  menjInv={inv}/>
-              </Route>
+        <BrowserRouter>
+          <Navbar />
 
-              <Route path="/manajemen-inv">
-                <ManajemenInv menjInv={inv} store={storeData} update={updateData} delete={deleteData}/>
-              </Route>
-            </Switch>
-          </BrowserRouter>
-        </Container>
+          <Switch>
+            <Route path="/" exact>
+              <Beranda bookList={books} />
+            </Route>
+
+            <Route path="/manajemen-buku">
+              <ManajemenBuku
+                bookList={books}
+                store={storeData}
+                update={updateData}
+                remove={deleteData}
+              />
+            </Route>
+          </Switch>
+        </BrowserRouter>
       </div>
     </div>
   );
