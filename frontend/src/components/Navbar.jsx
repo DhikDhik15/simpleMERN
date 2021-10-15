@@ -1,39 +1,24 @@
-import img from "../assets/img.png";
-import {
-  Navbar,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-  Container,
-} from "react-bootstrap";
-import React from "react";
+import React from 'react'
+import logo from '../assets/img.png'
 
-/*navigation component*/
-export default function navbar() {
-  return (
-    <Navbar bg="light" variant="light">
-      <Container>
-      <img src={img} alt="" style={{ height: "30px" }} />
-      <Navbar.Brand href="#home"> INV-APP</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto">
-          <Nav.Link href="/" className="nav-link" >Home</Nav.Link>
-          <Nav.Link href="/manajemen-inv" className="nav-link" >Add Data</Nav.Link>
-        </Nav>
-        <Form className="d-flex">
-          <FormControl
-            type="search"
-            placeholder="Search"
-            className="mr-2"
-            aria-label="Search"
-          />
-          <Button variant="primary">Search</Button>
-        </Form>
-      </Navbar.Collapse>
-      </Container>
-    </Navbar>
-
-  );
+function Navbar() {
+    return (
+        <div>
+            <nav className="navbar navbar-expand bg-dark">
+                <div className="container">
+                    <ul className="nav">
+                        <img src={logo} alt="" style= {{ height: "40px"}} />
+                        <li>
+                            <a href="/" className="nav-link">Beranda</a>
+                        </li>
+                        <li> 
+                            <a href="/manajemen-buku" className="nav-link">Manajemen Buku</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    )
 }
+
+export default Navbar
