@@ -3,6 +3,7 @@ import { useState } from "react";
 
 function ManajemenBuku({ bookList, store, update, remove }) {
   const [inputBook, setInputBook] = useState();
+  console.log(bookList);
   const [form, setForm] = useState();
 
   /*function handling*/
@@ -92,7 +93,7 @@ function ManajemenBuku({ bookList, store, update, remove }) {
               <input
                 type="submit"
                 className="btn btn-primary ml-5"
-                value="simpan "
+                value="Simpan "
               />
             </div>
           </form>
