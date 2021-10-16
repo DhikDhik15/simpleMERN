@@ -1,9 +1,11 @@
 const express = require('express');
 const app = express();
-const midInv = require('../middleware/inventory');
 
 module.exports = function (app){
-    const inventory = require('../controller/inventory');
+    const books = require('../controller/books');
 
-    app.route('/addInv').post(inventory.addInv);
+    app.route('/add').post(books.addBook);
+    app.route('/get').get(books.getBooks);
+    app.route('/put/:id').put(books.putBooks);
+    app.route('/del/:id').delete(books.deleteBooks);
 }
