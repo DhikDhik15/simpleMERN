@@ -4,16 +4,18 @@ import ModalBuku from "../components/modal/ModalBuku";
 
 import { API_URL_GET, API_URL_DELETE } from "../apis/ListApi";
 import { BsFillBagXFill, BsFillPencilFill, BsGrid3X3Gap } from "react-icons/bs";
-import  Modal from "../assets/modals/Modal";
+import Modal from "../assets/modals/Modal";
 
 export default class ManajemenBuku extends Component {
   constructor(props) {
     super(props);
+
     this.closeModal = this.closeModal.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
 
     /*save data in array state*/
     this.state = {
-      id: "",
+      _id: "",
       judul: "",
       pengarang: "",
       harga: "",
@@ -30,7 +32,7 @@ export default class ManajemenBuku extends Component {
     axios
       .get(API_URL_GET)
       .then((res) => {
-        // console.log(res.data.book);
+        console.log(res.data.book);
         this.setState({ bookList: res.data.book });
       })
       .catch((error) => {
@@ -53,45 +55,28 @@ export default class ManajemenBuku extends Component {
     });
   };
 
-  handleDelete = (id) => {
+  /*function delete*/
+  handleDelete(_id) {
     axios({
       method: "DELETE",
-      url: API_URL_DELETE(),
+      url: API_URL_DELETE + `${_id}`,
       data: {
-        id: id,
+        id: _id,
       },
+      headers: { "Content-Type": "application/json" },
     }).then((res) => {
       this.setState({
         isDelete: false,
       });
       this.refreshTable();
     });
+  }
+  /*end*/
+  
+  /*refresh table*/ 
+  refreshTable = () => {
+    this.componentDidMount();
   };
-
-  // /*put data*/
-  // componentDidUpdate(inputBook) {
-  //   axios
-  //   .put(API_URL + "put" + inputBook._id, inputBook)
-  //   .then((res) => {
-  //     this.setState({ bookList: res.data.book });
-  //   })
-  //   .catch(error => {
-  //     this.setState({ errorMessage: error.message });
-  //     console.error('ada error', error);
-  //   });
-  // }
-
-  // componentDidMount(book){
-  //   axios
-  //   .delete(API_URL + "del" + book_id)
-  //   .then((res) => {
-  //     this.setState({ bookList: res.data.book });
-  //   })
-  //   .catch(error => {
-  //     this.setState({ errorMessage: error.message });
-  //     console.error('ada error', error);
-  //   });
-  // }
 
   render() {
     return (
@@ -142,7 +127,7 @@ export default class ManajemenBuku extends Component {
                       className="btn btn-danger"
                       onClick={() =>
                         this.isDelete({
-                          id: book.id,
+                          id: book._id,
                           judul: book.judul,
                         })
                       }
