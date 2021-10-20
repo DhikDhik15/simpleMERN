@@ -60,23 +60,6 @@ export default class AddBuku extends Component {
     }
   };
 
-  // alert("Data added");
-  // event.preventDefault();
-
-  // const addBook = {
-  //   judul: this.state.judul,
-  //   pengarang: this.state.pengarang,
-  //   harga: this.state.harga,
-  //   stok: this.state.stok,
-  // };
-
-  // Axios.post(API_URL + "add", { addBook })
-  //   .then((res) => {
-  //     this.setState((inputBook) => [...inputBook, addBook]);
-  //     console.log(res.data);
-  //   })
-  //   .catch((err) => console.log(err.response));
-
   resetBook = () => {
     Array.from(document.querySelectorAll("input")).forEach(
       (input) => (input.value = "")
